@@ -7,380 +7,178 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  :root {
-    --bg:       #0a0d14;
-    --surface:  #111520;
-    --card:     #161b2a;
-    --border:   #1e2640;
-    --border2:  #262f4a;
-    --green:    #10b981;
-    --red:      #ef4444;
-    --amber:    #f59e0b;
-    --blue:     #3b82f6;
-    --purple:   #8b5cf6;
-    --teal:     #06b6d4;
-    --text:     #e8ecf4;
-    --text2:    #8b96b0;
-    --text3:    #5a6480;
-    --accent:   #3b82f6;
-    --accent2:  #1d4ed8;
-  }
+:root {
+  --bg:      #090c12;
+  --surf:    #0f1420;
+  --card:    #141928;
+  --border:  #1c2338;
+  --border2: #242d45;
+  --green:   #10b981;
+  --red:     #ef4444;
+  --amber:   #f59e0b;
+  --blue:    #3b82f6;
+  --purple:  #8b5cf6;
+  --teal:    #06b6d4;
+  --pink:    #ec4899;
+  --text:    #e8ecf4;
+  --text2:   #8b96b0;
+  --text3:   #4a546e;
+  --accent:  #3b82f6;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(9,12,18,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.nav-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;display:flex;align-items:center;gap:6px}
+.nav-brand span{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:10px}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-  }
+/* PERIOD TABS */
+.period-tabs{display:flex;gap:3px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:3px}
+.period-tab{padding:4px 13px;border-radius:5px;border:none;background:transparent;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+.period-tab.active{background:var(--accent);color:#fff}
 
-  /* ── NAV ── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(10,13,20,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 28px;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 56px;
-  }
-  .nav-brand {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 18px;
-    color: var(--text);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .nav-brand span { color: var(--accent); }
-  .nav-actions { display: flex; align-items: center; gap: 12px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 7px 16px; border-radius: 8px; border: none;
-    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
-    cursor: pointer; transition: all 0.15s;
-  }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { background: var(--accent2); }
-  .btn-ghost {
-    background: transparent; color: var(--text2);
-    border: 1px solid var(--border2);
-  }
-  .btn-ghost:hover { background: var(--card); color: var(--text); }
-  .btn-danger { background: transparent; color: var(--red); border: 1px solid #ef444430; }
-  .btn-danger:hover { background: #ef444415; }
+/* SELLER SELECTOR */
+.seller-select{background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;padding:5px 10px;cursor:pointer;outline:none}
+.seller-select:focus{border-color:var(--accent)}
 
-  /* ── HERO ── */
-  .hero {
-    padding: 40px 28px 28px;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero-eyebrow {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-    color: var(--accent); text-transform: uppercase; margin-bottom: 8px;
-  }
-  .hero-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 28px; font-weight: 800; color: var(--text);
-    margin-bottom: 6px;
-  }
-  .hero-sub { font-size: 14px; color: var(--text2); }
+/* TABS NAV */
+.tabs-nav{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 24px;background:var(--surf);overflow-x:auto}
+.tab-btn{padding:12px 18px;border:none;background:transparent;color:var(--text3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:6px}
+.tab-btn:hover{color:var(--text2)}
+.tab-btn.active{color:var(--text);border-bottom-color:var(--accent)}
+.tab-icon{font-size:14px}
 
-  /* ── MAIN LAYOUT ── */
-  .main { max-width: 1280px; margin: 0 auto; padding: 28px; }
+/* MAIN */
+.main{max-width:1280px;margin:0 auto;padding:24px}
 
-  /* ── SECTION HEADER ── */
-  .section-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 16px;
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 15px; font-weight: 700; color: var(--text);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .section-title::before {
-    content: ''; display: block;
-    width: 3px; height: 16px; border-radius: 2px;
-    background: var(--accent);
-  }
+/* SECTION HEADER */
+.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.sec-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+.sec-title::before{content:'';display:block;width:3px;height:15px;border-radius:2px;background:var(--accent)}
 
-  /* ── SELLER CONNECT BAR ── */
-  .connect-bar {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin-bottom: 28px;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    flex-wrap: wrap;
-  }
-  .connect-bar p { font-size: 13px; color: var(--text2); }
-  .connect-bar strong { color: var(--text); }
+/* KPI GRID */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:20px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative;overflow:hidden;transition:border-color .15s}
+.kpi-card:hover{border-color:var(--border2)}
+.kpi-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:.6}
+.kpi-card.g::after{background:var(--green)}
+.kpi-card.r::after{background:var(--red)}
+.kpi-card.a::after{background:var(--amber)}
+.kpi-card.p::after{background:var(--purple)}
+.kpi-card.t::after{background:var(--teal)}
+.kpi-card.k::after{background:var(--pink)}
+.kpi-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.kpi-value{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:6px}
+.kpi-value.lg{font-size:26px}
+.kpi-badges{display:flex;flex-wrap:wrap;gap:5px}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500}
+.badge.up{background:#10b98120;color:var(--green)}
+.badge.dn{background:#ef444420;color:var(--red)}
+.badge.nt{background:#3b82f620;color:var(--blue)}
+.badge.am{background:#f59e0b20;color:var(--amber)}
+.badge-lbl{font-size:9px;opacity:.7;text-transform:uppercase}
 
-  /* ── SELLER LIST ── */
-  .sellers-grid {
-    display: flex; flex-wrap: wrap; gap: 10px;
-    margin-bottom: 28px;
-  }
-  .seller-chip {
-    display: flex; align-items: center; gap: 8px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 14px;
-    cursor: pointer;
-    transition: all 0.15s;
-    font-size: 13px; color: var(--text2);
-  }
-  .seller-chip:hover { border-color: var(--accent); color: var(--text); }
-  .seller-chip.active {
-    border-color: var(--accent);
-    background: #3b82f610;
-    color: var(--text);
-  }
-  .seller-chip .dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--text3);
-  }
-  .seller-chip.active .dot { background: var(--green); }
-  .seller-remove {
-    background: none; border: none; cursor: pointer;
-    color: var(--text3); font-size: 15px; line-height: 1;
-    padding: 0 0 0 4px;
-    transition: color 0.15s;
-  }
-  .seller-remove:hover { color: var(--red); }
+/* CHART CARD */
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px}
+.chart-title{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:16px}
+.chart-wrap{position:relative;height:220px}
 
-  /* ── PERIOD SELECTOR ── */
-  .period-tabs {
-    display: flex; gap: 4px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 3px;
-  }
-  .period-tab {
-    padding: 5px 14px; border-radius: 6px; border: none;
-    background: transparent; color: var(--text2);
-    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
-    cursor: pointer; transition: all 0.15s;
-  }
-  .period-tab.active {
-    background: var(--accent); color: #fff;
-  }
+/* TABLE */
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px}
+.tbl-head{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.tbl-search{background:var(--surf);border:1px solid var(--border);border-radius:6px;padding:5px 11px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;width:180px}
+.tbl-search:focus{outline:none;border-color:var(--accent)}
+table{width:100%;border-collapse:collapse}
+thead th{text-align:left;padding:10px 18px;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border)}
+tbody tr:hover{background:#ffffff04}
+tbody td{padding:11px 18px;font-size:12px;color:var(--text2);border-bottom:1px solid var(--border)}
+tbody tr:last-child td{border-bottom:none}
+td.mono{font-family:'DM Mono',monospace;font-size:11px}
+td.val{font-family:'DM Mono',monospace;font-size:12px;color:var(--text)}
+.curva{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700}
+.curva-a{background:#10b98120;color:var(--green)}
+.curva-b{background:#3b82f620;color:var(--blue)}
+.curva-c{background:#f59e0b20;color:var(--amber)}
 
-  /* ── KPI CARDS ── */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-  .kpi-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.15s;
-  }
-  .kpi-card:hover { border-color: var(--border2); }
-  .kpi-card::after {
-    content: ''; position: absolute;
-    top: 0; left: 0; right: 0; height: 2px;
-    background: var(--accent);
-    opacity: 0.5;
-  }
-  .kpi-card.green::after  { background: var(--green); }
-  .kpi-card.amber::after  { background: var(--amber); }
-  .kpi-card.red::after    { background: var(--red); }
-  .kpi-card.purple::after { background: var(--purple); }
-  .kpi-card.teal::after   { background: var(--teal); }
+/* BREAKDOWN */
+.breakdown{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:20px}
+.bk-title{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:14px}
+.bk-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px}
+.bk-row:last-child{border-bottom:none}
+.bk-row.total{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;padding-top:12px}
+.bk-lbl{color:var(--text2);display:flex;align-items:center;gap:7px}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.bk-val{font-family:'DM Mono',monospace;color:var(--text)}
+.bk-val.neg{color:var(--red)}
+.bk-val.pos{color:var(--green)}
+.bk-pct{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;margin-left:6px}
 
-  .kpi-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--text3); margin-bottom: 10px;
-  }
-  .kpi-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 24px; font-weight: 700; color: var(--text);
-    margin-bottom: 8px;
-  }
-  .kpi-value.large { font-size: 28px; }
-  .kpi-badges { display: flex; flex-wrap: wrap; gap: 6px; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 3px 8px; border-radius: 5px;
-    font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
-  }
-  .badge.up   { background: #10b98120; color: var(--green); }
-  .badge.down { background: #ef444420; color: var(--red); }
-  .badge.neutral { background: #3b82f620; color: var(--blue); }
-  .badge-label { font-size: 9px; opacity: 0.7; text-transform: uppercase; }
+/* COMP GRID */
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.comp-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.comp-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.comp-tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.comp-tag.wow{background:#8b5cf620;color:var(--purple)}
+.comp-tag.mom{background:#06b6d420;color:var(--teal)}
+.comp-tag.yoy{background:#10b98120;color:var(--green)}
+.comp-period{font-size:10px;color:var(--text3)}
+.comp-val{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:5px}
+.comp-delta{font-size:11px;font-family:'DM Mono',monospace;display:flex;align-items:center;gap:5px}
+.comp-delta.up{color:var(--green)}
+.comp-delta.dn{color:var(--red)}
+.comp-lbl{font-size:10px;color:var(--text3);margin-top:3px}
 
-  /* ── GMV BREAKDOWN ── */
-  .breakdown {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 24px;
-  }
-  .breakdown-title {
-    font-size: 12px; font-weight: 600; color: var(--text2);
-    text-transform: uppercase; letter-spacing: 0.08em;
-    margin-bottom: 16px;
-  }
-  .breakdown-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-  .breakdown-row:last-child { border-bottom: none; }
-  .breakdown-row.total {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700; font-size: 15px;
-    padding-top: 14px;
-  }
-  .breakdown-label { color: var(--text2); display: flex; align-items: center; gap: 8px; }
-  .breakdown-label .dot-sm {
-    width: 6px; height: 6px; border-radius: 50%;
-  }
-  .breakdown-val { font-family: 'DM Mono', monospace; color: var(--text); }
-  .breakdown-val.neg { color: var(--red); }
-  .breakdown-val.pos { color: var(--green); }
-  .breakdown-pct {
-    font-size: 10px; color: var(--text3);
-    font-family: 'DM Mono', monospace;
-    margin-left: 8px;
-  }
+/* REPUTAÇÃO */
+.rep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:20px}
+.rep-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px}
+.rep-level{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.rep-dot{width:12px;height:12px;border-radius:50%}
+.rep-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700}
+.rep-bar-wrap{margin-bottom:10px}
+.rep-bar-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:5px}
+.rep-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.rep-bar-fill{height:100%;border-radius:3px;transition:width .6s ease}
 
-  /* ── COMPARATIVO TABLE ── */
-  .comp-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-  .comp-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px;
-  }
-  .comp-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 14px;
-  }
-  .comp-tag {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; padding: 3px 8px;
-    border-radius: 4px; background: #3b82f615; color: var(--blue);
-  }
-  .comp-tag.wow { background: #8b5cf615; color: var(--purple); }
-  .comp-tag.mom { background: #06b6d415; color: var(--teal); }
-  .comp-tag.yoy { background: #10b98115; color: var(--green); }
-  .comp-period { font-size: 10px; color: var(--text3); }
-  .comp-val {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px; font-weight: 700; color: var(--text);
-    margin-bottom: 6px;
-  }
-  .comp-delta {
-    font-size: 12px; font-family: 'DM Mono', monospace;
-    display: flex; align-items: center; gap: 6px;
-  }
-  .comp-delta.up   { color: var(--green); }
-  .comp-delta.down { color: var(--red); }
-  .comp-delta.neutral { color: var(--text3); }
-  .comp-label { font-size: 11px; color: var(--text3); margin-top: 4px; }
+/* SEMAFORO */
+.sem{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+.sem-g{background:var(--green)}
+.sem-a{background:var(--amber)}
+.sem-r{background:var(--red)}
 
-  /* ── SELLERS TABLE ── */
-  .table-wrap {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 24px;
-  }
-  .table-header {
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .table-search {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    padding: 6px 12px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif; font-size: 12px;
-    width: 200px;
-  }
-  .table-search:focus { outline: none; border-color: var(--accent); }
-  table { width: 100%; border-collapse: collapse; }
-  thead th {
-    text-align: left; padding: 12px 20px;
-    font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--text3);
-    border-bottom: 1px solid var(--border);
-  }
-  tbody tr { transition: background 0.1s; }
-  tbody tr:hover { background: #ffffff05; }
-  tbody td {
-    padding: 13px 20px;
-    font-size: 13px; color: var(--text2);
-    border-bottom: 1px solid var(--border);
-  }
-  tbody tr:last-child td { border-bottom: none; }
-  td.mono { font-family: 'DM Mono', monospace; font-size: 12px; }
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:20px 0}
 
-  /* ── ESTADO VAZIO ── */
-  .empty-state {
-    text-align: center; padding: 60px 20px;
-    color: var(--text3);
-  }
-  .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
-  .empty-title { font-size: 15px; color: var(--text2); margin-bottom: 6px; }
-  .empty-sub   { font-size: 12px; }
+/* TAB PANEL */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
 
-  /* ── LOADING ── */
-  .loading {
-    display: flex; align-items: center; justify-content: center;
-    gap: 8px; padding: 40px;
-    color: var(--text3); font-size: 13px;
-  }
-  .spinner {
-    width: 18px; height: 18px; border-radius: 50%;
-    border: 2px solid var(--border2);
-    border-top-color: var(--accent);
-    animation: spin 0.7s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* LOADING */
+.loading{display:flex;align-items:center;justify-content:center;gap:8px;padding:40px;color:var(--text3);font-size:13px}
+.spinner{width:16px;height:16px;border-radius:50%;border:2px solid var(--border2);border-top-color:var(--accent);animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-  /* ── TOAST ── */
-  #toast {
-    position: fixed; bottom: 24px; right: 24px; z-index: 999;
-    background: var(--card); border: 1px solid var(--border2);
-    border-radius: 10px; padding: 12px 18px;
-    font-size: 13px; color: var(--text);
-    opacity: 0; transform: translateY(8px);
-    transition: all 0.25s; pointer-events: none;
-  }
-  #toast.show { opacity: 1; transform: translateY(0); }
+/* EMPTY */
+.empty{text-align:center;padding:50px 20px;color:var(--text3)}
+.empty-icon{font-size:36px;margin-bottom:10px;opacity:.4}
+.empty-title{font-size:14px;color:var(--text2);margin-bottom:5px}
 
-  /* ── DIVIDER ── */
-  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+/* TOAST */
+#toast{position:fixed;bottom:22px;right:22px;z-index:999;background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:11px 16px;font-size:13px;color:var(--text);opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none}
+#toast.show{opacity:1;transform:translateY(0)}
 
-  @media (max-width: 768px) {
-    .comp-grid { grid-template-columns: 1fr; }
-    .kpi-grid  { grid-template-columns: repeat(2, 1fr); }
-    nav { padding: 0 16px; }
-    .main { padding: 16px; }
-    .hero { padding: 24px 16px 20px; }
-  }
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+@media(max-width:768px){
+  .comp-grid{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  nav,.main{padding:0 14px}
+  .main{padding:14px}
+}
 </style>
 </head>
 <body>
@@ -388,7 +186,10 @@
 <!-- NAV -->
 <nav>
   <div class="nav-brand">Intel<span>KPI</span></div>
-  <div class="nav-actions">
+  <div class="nav-right">
+    <select class="seller-select" id="sellerSelect" onchange="onSellerChange()">
+      <option value="">Carregando...</option>
+    </select>
     <div class="period-tabs" id="periodTabs">
       <button class="period-tab" data-days="7">7d</button>
       <button class="period-tab active" data-days="30">30d</button>
@@ -397,341 +198,528 @@
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">Mercado Livre · KPI Dashboard</div>
-  <div class="hero-title">Visão de GMV</div>
-  <div class="hero-sub">Vendas brutas, cancelamentos, devoluções e comparativos YOY · MOM · WOW</div>
+<!-- TABS NAV -->
+<div class="tabs-nav">
+  <button class="tab-btn active" data-tab="gmv"><span class="tab-icon">📈</span> GMV</button>
+  <button class="tab-btn" data-tab="ads"><span class="tab-icon">📢</span> ADS</button>
+  <button class="tab-btn" data-tab="full"><span class="tab-icon">📦</span> Full</button>
+  <button class="tab-btn" data-tab="nonfull"><span class="tab-icon">🏪</span> Fora do Full</button>
+  <button class="tab-btn" data-tab="promo"><span class="tab-icon">🎯</span> Promoções</button>
+  <button class="tab-btn" data-tab="rep"><span class="tab-icon">⭐</span> Reputação</button>
 </div>
 
 <!-- MAIN -->
 <div class="main">
 
-  <!-- SELLERS -->
-  <div class="section-header">
-    <div class="section-title">Sellers conectados</div>
+<!-- ═══════════════ GMV ═══════════════ -->
+<div class="tab-panel active" id="tab-gmv">
+  <div class="sec-header"><div class="sec-title">Visão de GMV</div></div>
+  <div class="kpi-grid" id="gmv-kpis">
+    <div class="loading"><div class="spinner"></div> Carregando...</div>
   </div>
-  <div id="sellersWrap">
-    <div class="loading"><div class="spinner"></div> Carregando sellers…</div>
+  <div class="breakdown" id="gmv-breakdown" style="display:none">
+    <div class="bk-title">Composição do GMV</div>
+    <div class="bk-row">
+      <div class="bk-lbl"><span class="dot" style="background:var(--blue)"></span>Vendas brutas</div>
+      <div><span class="bk-val" id="bBruto">—</span><span class="bk-pct" id="bBrutoPct"></span></div>
+    </div>
+    <div class="bk-row">
+      <div class="bk-lbl"><span class="dot" style="background:var(--red)"></span>(−) Cancelamentos</div>
+      <div><span class="bk-val neg" id="bCancel">—</span><span class="bk-pct" id="bCancelPct"></span></div>
+    </div>
+    <div class="bk-row">
+      <div class="bk-lbl"><span class="dot" style="background:var(--amber)"></span>(−) Devoluções</div>
+      <div><span class="bk-val neg" id="bDev">—</span><span class="bk-pct" id="bDevPct"></span></div>
+    </div>
+    <div class="bk-row total">
+      <div class="bk-lbl" style="color:var(--text)">GMV Líquido</div>
+      <span class="bk-val pos" id="bLiq">—</span>
+    </div>
   </div>
-
-  <div class="divider"></div>
-
-  <!-- GMV SECTION -->
-  <div id="gmvSection" style="display:none">
-
-    <div class="section-header">
-      <div class="section-title">GMV — <span id="sellerName" style="color:var(--text2);font-weight:400;font-size:13px;margin-left:4px"></span></div>
-    </div>
-
-    <!-- KPI CARDS -->
-    <div class="kpi-grid" id="kpiGrid">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
-
-    <!-- BREAKDOWN -->
-    <div class="breakdown" id="breakdownBlock" style="display:none">
-      <div class="breakdown-title">Composição do GMV</div>
-      <div class="breakdown-row">
-        <div class="breakdown-label">
-          <span class="dot-sm" style="background:var(--blue)"></span>
-          Vendas brutas (pedidos pagos)
-        </div>
-        <div>
-          <span class="breakdown-val" id="bBruto">—</span>
-          <span class="breakdown-pct" id="bBrutoPct"></span>
-        </div>
-      </div>
-      <div class="breakdown-row">
-        <div class="breakdown-label">
-          <span class="dot-sm" style="background:var(--red)"></span>
-          (−) Cancelamentos
-        </div>
-        <div>
-          <span class="breakdown-val neg" id="bCancelado">—</span>
-          <span class="breakdown-pct" id="bCanceladoPct"></span>
-        </div>
-      </div>
-      <div class="breakdown-row">
-        <div class="breakdown-label">
-          <span class="dot-sm" style="background:var(--amber)"></span>
-          (−) Devoluções
-        </div>
-        <div>
-          <span class="breakdown-val neg" id="bDevolucao">—</span>
-          <span class="breakdown-pct" id="bDevolucaoPct"></span>
-        </div>
-      </div>
-      <div class="breakdown-row total">
-        <div class="breakdown-label" style="color:var(--text)">GMV Líquido</div>
-        <span class="breakdown-val pos" id="bLiquido">—</span>
-      </div>
-    </div>
-
-    <!-- COMPARATIVOS -->
-    <div class="section-header">
-      <div class="section-title">Comparativos</div>
-    </div>
-    <div class="comp-grid" id="compGrid">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
-
+  <div class="sec-header"><div class="sec-title">Comparativos</div></div>
+  <div class="comp-grid" id="gmv-comps">
+    <div class="loading"><div class="spinner"></div></div>
   </div>
-
-  <!-- SELLERS TABLE -->
-  <div class="divider"></div>
-  <div class="section-header">
-    <div class="section-title">Todos os sellers</div>
-    <input class="table-search" id="searchInput" placeholder="Buscar seller…" oninput="filterTable()"/>
+  <div class="chart-card">
+    <div class="chart-title">Evolução do GMV Líquido</div>
+    <div class="chart-wrap"><canvas id="chartGMV"></canvas></div>
   </div>
-  <div class="table-wrap">
-    <table id="sellersTable">
-      <thead>
-        <tr>
-          <th>Seller</th>
-          <th>User ID</th>
-          <th>Última atualização</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="sellersBody"></tbody>
-    </table>
-  </div>
-
 </div>
 
-<!-- TOAST -->
+<!-- ═══════════════ ADS ═══════════════ -->
+<div class="tab-panel" id="tab-ads">
+  <div class="sec-header"><div class="sec-title">Performance de ADS</div></div>
+  <div class="kpi-grid" id="ads-kpis"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+    <div class="chart-card" style="margin-bottom:0">
+      <div class="chart-title">Receita vs Investimento</div>
+      <div class="chart-wrap"><canvas id="chartADS"></canvas></div>
+    </div>
+    <div class="chart-card" style="margin-bottom:0">
+      <div class="chart-title">ACOS por Campanha</div>
+      <div class="chart-wrap"><canvas id="chartACOS"></canvas></div>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+    <div class="tbl-head"><div class="sec-title">Campanhas</div></div>
+    <table><thead><tr>
+      <th>Campanha</th><th>Investimento</th><th>Receita</th><th>ROAS</th><th>ACOS</th><th>CTR</th><th>CVR</th><th>Status</th>
+    </tr></thead><tbody id="ads-table"></tbody></table>
+  </div>
+</div>
+
+<!-- ═══════════════ FULL ═══════════════ -->
+<div class="tab-panel" id="tab-full">
+  <div class="sec-header"><div class="sec-title">Produtos no Full ML</div></div>
+  <div class="kpi-grid" id="full-kpis"></div>
+  <div class="tbl-wrap">
+    <div class="tbl-head">
+      <div class="sec-title">Catálogo Full</div>
+      <input class="tbl-search" placeholder="Buscar produto..." oninput="filterTbl('full-tbody',this.value)"/>
+    </div>
+    <table><thead><tr>
+      <th>Produto</th><th>MLB</th><th>SKU</th><th>Estoque</th><th>Ticket Médio</th><th>Vendas</th><th>Receita</th><th>Curva</th>
+    </tr></thead><tbody id="full-tbody"></tbody></table>
+  </div>
+</div>
+
+<!-- ═══════════════ FORA DO FULL ═══════════════ -->
+<div class="tab-panel" id="tab-nonfull">
+  <div class="sec-header"><div class="sec-title">Produtos Fora do Full</div></div>
+  <div class="kpi-grid" id="nonfull-kpis"></div>
+  <div class="tbl-wrap">
+    <div class="tbl-head">
+      <div class="sec-title">Catálogo Fora do Full</div>
+      <input class="tbl-search" placeholder="Buscar produto..." oninput="filterTbl('nonfull-tbody',this.value)"/>
+    </div>
+    <table><thead><tr>
+      <th>Produto</th><th>MLB</th><th>SKU</th><th>Estoque</th><th>Ticket Médio</th><th>Vendas</th><th>Curva</th>
+    </tr></thead><tbody id="nonfull-tbody"></tbody></table>
+  </div>
+</div>
+
+<!-- ═══════════════ PROMOÇÕES ═══════════════ -->
+<div class="tab-panel" id="tab-promo">
+  <div class="sec-header"><div class="sec-title">Central de Promoções</div></div>
+  <div class="kpi-grid" id="promo-kpis"></div>
+  <div class="tbl-wrap">
+    <div class="tbl-head">
+      <div class="sec-title">Produtos em Promoção</div>
+      <input class="tbl-search" placeholder="Buscar produto..." oninput="filterTbl('promo-tbody',this.value)"/>
+    </div>
+    <table><thead><tr>
+      <th>Produto</th><th>MLB</th><th>SKU</th><th>Estoque</th><th>Preço Original</th><th>Preço Promo</th><th>Desconto</th><th>Curva</th>
+    </tr></thead><tbody id="promo-tbody"></tbody></table>
+  </div>
+</div>
+
+<!-- ═══════════════ REPUTAÇÃO ═══════════════ -->
+<div class="tab-panel" id="tab-rep">
+  <div class="sec-header"><div class="sec-title">Reputação do Seller</div></div>
+  <div class="kpi-grid" id="rep-kpis"></div>
+  <div class="rep-grid" id="rep-metrics"></div>
+  <div class="tbl-wrap">
+    <div class="tbl-head"><div class="sec-title">Anúncios com Problemas</div></div>
+    <table><thead><tr>
+      <th>Produto</th><th>MLB</th><th>Problema</th><th>Impacto</th><th>Desde</th>
+    </tr></thead><tbody id="rep-tbody"></tbody></table>
+  </div>
+</div>
+
+</div><!-- /main -->
+
 <div id="toast"></div>
 
 <script>
 // ─── STATE ────────────────────────────────────────────────────────────────────
-let sellers = [];
 let activeSeller = null;
-let activeDays = 30;
+let activeDays   = 30;
+let sellers      = [];
+let chartGMV, chartADS, chartACOS;
 
-// ─── UTILS ────────────────────────────────────────────────────────────────────
-const fmt = (v) => 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-const fmtN = (v) => Number(v).toLocaleString('pt-BR');
-const pct = (v) => (v >= 0 ? '+' : '') + v + '%';
+// ─── UTILS ───────────────────────────────────────────────────────────────────
+const R = v => 'R$ ' + Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const N = v => Number(v).toLocaleString('pt-BR');
+const P = v => (v>=0?'+':'')+v+'%';
 
-function toast(msg, color = 'var(--text)') {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.style.color = color;
+function toast(msg,color='var(--green)'){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.style.color=color;
   el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2500);
+  setTimeout(()=>el.classList.remove('show'),2500);
+}
+
+function filterTbl(tbodyId, q){
+  document.querySelectorAll('#'+tbodyId+' tr').forEach(r=>{
+    r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?'':'none';
+  });
+}
+
+function badgeComp(comp,label){
+  if(!comp) return '';
+  const up=comp.pct>=0;
+  return `<span class="badge ${up?'up':'dn'}"><span class="badge-lbl">${label}</span>${P(comp.pct)}</span>`;
 }
 
 // ─── SELLERS ─────────────────────────────────────────────────────────────────
-async function loadSellers() {
+async function loadSellers(){
   const res = await fetch('/api/sellers');
-  sellers = await res.json();
-  renderSellerChips();
-  renderSellersTable();
-  if (sellers.length > 0 && !activeSeller) {
-    selectSeller(sellers[0].user_id, sellers[0].nickname);
-  } else if (sellers.length === 0) {
-    document.getElementById('sellersWrap').innerHTML = `
-      <div class="connect-bar">
-        <div>
-          <strong>Nenhum seller conectado</strong>
-          <p>Clique em "+ Conectar Seller" para adicionar sua primeira conta do Mercado Livre.</p>
-        </div>
-      </div>`;
+  sellers   = await res.json();
+  const sel = document.getElementById('sellerSelect');
+  sel.innerHTML = sellers.length
+    ? sellers.map(s=>`<option value="${s.user_id}">${s.nickname}</option>`).join('')
+    : '<option value="">Nenhum seller</option>';
+  if(sellers.length){
+    activeSeller = sellers[0].user_id;
+    loadAll();
+  }
+  if(new URLSearchParams(location.search).get('connected')){
+    toast('✓ Seller conectado!');
+    history.replaceState({},'','/');
   }
 }
 
-function renderSellerChips() {
-  if (sellers.length === 0) return;
-  const wrap = document.getElementById('sellersWrap');
-  wrap.innerHTML = `<div class="sellers-grid" id="sellerChips"></div>`;
-  const grid = document.getElementById('sellerChips');
-  sellers.forEach(s => {
-    const chip = document.createElement('div');
-    chip.className = 'seller-chip' + (activeSeller === s.user_id ? ' active' : '');
-    chip.dataset.id = s.user_id;
-    chip.innerHTML = `
-      <span class="dot"></span>
-      <span>${s.nickname}</span>
-      <button class="seller-remove" title="Remover" onclick="removeSeller(event,'${s.user_id}')">×</button>`;
-    chip.addEventListener('click', () => selectSeller(s.user_id, s.nickname));
-    grid.appendChild(chip);
-  });
-}
-
-function renderSellersTable() {
-  const tbody = document.getElementById('sellersBody');
-  if (sellers.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state">
-      <div class="empty-icon">🏪</div>
-      <div class="empty-title">Nenhum seller cadastrado</div>
-      <div class="empty-sub">Conecte uma conta via OAuth para começar.</div>
-    </div></td></tr>`;
-    return;
-  }
-  tbody.innerHTML = sellers.map(s => `
-    <tr>
-      <td><strong>${s.nickname}</strong></td>
-      <td class="mono">${s.user_id}</td>
-      <td class="mono">${new Date(s.updated_at).toLocaleString('pt-BR')}</td>
-      <td><button class="btn btn-danger" onclick="removeSeller(event,'${s.user_id}')">Remover</button></td>
-    </tr>`).join('');
-}
-
-function filterTable() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  document.querySelectorAll('#sellersBody tr').forEach(row => {
-    row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
-  });
-}
-
-async function removeSeller(e, userId) {
-  e.stopPropagation();
-  if (!confirm('Remover este seller?')) return;
-  await fetch(`/api/sellers/${userId}`, { method: 'DELETE' });
-  toast('Seller removido.', 'var(--red)');
-  if (activeSeller === userId) {
-    activeSeller = null;
-    document.getElementById('gmvSection').style.display = 'none';
-  }
-  await loadSellers();
-}
-
-function selectSeller(userId, nickname) {
-  activeSeller = userId;
-  document.querySelectorAll('.seller-chip').forEach(c => {
-    c.classList.toggle('active', c.dataset.id === userId);
-  });
-  document.getElementById('sellerName').textContent = nickname;
-  document.getElementById('gmvSection').style.display = 'block';
-  loadGMV();
+function onSellerChange(){
+  activeSeller = document.getElementById('sellerSelect').value;
+  loadAll();
 }
 
 // ─── PERIOD TABS ─────────────────────────────────────────────────────────────
-document.querySelectorAll('.period-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    activeDays = parseInt(tab.dataset.days);
-    if (activeSeller) loadGMV();
+document.querySelectorAll('.period-tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.period-tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    activeDays = parseInt(t.dataset.days);
+    loadAll();
   });
 });
 
-// ─── GMV ─────────────────────────────────────────────────────────────────────
-async function loadGMV() {
-  // Reset
-  document.getElementById('kpiGrid').innerHTML = `<div class="loading"><div class="spinner"></div> Buscando dados na API do ML…</div>`;
-  document.getElementById('compGrid').innerHTML = `<div class="loading"><div class="spinner"></div></div>`;
-  document.getElementById('breakdownBlock').style.display = 'none';
+// ─── TAB SWITCHING ───────────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
 
-  const res = await fetch(`/api/gmv/${activeSeller}?period=${activeDays}`);
-  if (!res.ok) {
-    document.getElementById('kpiGrid').innerHTML = `<div class="empty-state"><div class="empty-title">Erro ao buscar dados</div></div>`;
-    return;
-  }
-  const d = await res.json();
-  renderKPIs(d);
-  renderBreakdown(d.atual);
-  renderComparativos(d);
+// ─── LOAD ALL ────────────────────────────────────────────────────────────────
+function loadAll(){
+  if(!activeSeller) return;
+  loadGMV();
+  loadADS();
+  loadFull();
+  loadNonFull();
+  loadPromo();
+  loadRep();
 }
 
-function renderKPIs(d) {
+// ═══════════════════════ GMV ═══════════════════════════════════════════════
+async function loadGMV(){
+  document.getElementById('gmv-kpis').innerHTML=`<div class="loading"><div class="spinner"></div> Buscando dados...</div>`;
+  document.getElementById('gmv-comps').innerHTML=`<div class="loading"><div class="spinner"></div></div>`;
+  document.getElementById('gmv-breakdown').style.display='none';
+
+  const res = await fetch(`/api/gmv/${activeSeller}?period=${activeDays}`);
+  if(!res.ok){ document.getElementById('gmv-kpis').innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-title">Erro ao carregar GMV</div></div>`; return; }
+  const d = await res.json();
   const a = d.atual;
-  document.getElementById('kpiGrid').innerHTML = `
-    <div class="kpi-card green">
+
+  document.getElementById('gmv-kpis').innerHTML=`
+    <div class="kpi-card g">
       <div class="kpi-label">GMV Líquido</div>
-      <div class="kpi-value large">${fmt(a.liquido)}</div>
-      <div class="kpi-badges">
-        ${badgeComp(d.wow.vs_atual, 'WOW')}
-        ${badgeComp(d.mom.vs_atual, 'MOM')}
-        ${badgeComp(d.yoy.vs_atual, 'YOY')}
-      </div>
+      <div class="kpi-value lg">${R(a.liquido)}</div>
+      <div class="kpi-badges">${badgeComp(d.wow.vs_atual,'WOW')}${badgeComp(d.mom.vs_atual,'MOM')}${badgeComp(d.yoy.vs_atual,'YOY')}</div>
     </div>
-    <div class="kpi-card blue">
+    <div class="kpi-card">
       <div class="kpi-label">Vendas Brutas</div>
-      <div class="kpi-value">${fmt(a.bruto)}</div>
-      <div class="kpi-badges"><span class="badge neutral">${fmtN(a.orders)} pedidos</span></div>
+      <div class="kpi-value">${R(a.bruto)}</div>
+      <div class="kpi-badges"><span class="badge nt">${N(a.orders)} pedidos</span></div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">Ticket Médio</div>
-      <div class="kpi-value">${fmt(a.ticket_medio)}</div>
-      <div class="kpi-badges"><span class="badge neutral">por pedido pago</span></div>
+      <div class="kpi-value">${R(a.ticket_medio)}</div>
+      <div class="kpi-badges"><span class="badge nt">por pedido</span></div>
     </div>
-    <div class="kpi-card red">
+    <div class="kpi-card r">
       <div class="kpi-label">Cancelamentos</div>
-      <div class="kpi-value">${fmt(a.cancelado)}</div>
-      <div class="kpi-badges">
-        <span class="badge ${a.bruto > 0 && (a.cancelado/a.bruto*100) > 5 ? 'down' : 'neutral'}">
-          ${a.bruto > 0 ? (a.cancelado/a.bruto*100).toFixed(1) : 0}% das brutas
-        </span>
-      </div>
+      <div class="kpi-value">${R(a.cancelado)}</div>
+      <div class="kpi-badges"><span class="badge ${(a.cancelado/a.bruto*100)>5?'dn':'nt'}">${a.bruto>0?(a.cancelado/a.bruto*100).toFixed(1):0}%</span></div>
     </div>
-    <div class="kpi-card amber">
+    <div class="kpi-card a">
       <div class="kpi-label">Devoluções</div>
-      <div class="kpi-value">${fmt(a.devolucao)}</div>
-      <div class="kpi-badges">
-        <span class="badge neutral">
-          ${a.bruto > 0 ? (a.devolucao/a.bruto*100).toFixed(1) : 0}% das brutas
-        </span>
-      </div>
-    </div>
-  `;
-}
-
-function badgeComp(comp, label) {
-  if (!comp) return '';
-  const up = comp.pct >= 0;
-  return `<span class="badge ${up ? 'up' : 'down'}">
-    <span class="badge-label">${label}</span>
-    ${pct(comp.pct)}
-  </span>`;
-}
-
-function renderBreakdown(a) {
-  const block = document.getElementById('breakdownBlock');
-  block.style.display = 'block';
-  document.getElementById('bBruto').textContent     = fmt(a.bruto);
-  document.getElementById('bBrutoPct').textContent  = '100%';
-  document.getElementById('bCancelado').textContent  = '− ' + fmt(a.cancelado);
-  document.getElementById('bCanceladoPct').textContent = a.bruto > 0 ? (a.cancelado/a.bruto*100).toFixed(1)+'%' : '';
-  document.getElementById('bDevolucao').textContent  = '− ' + fmt(a.devolucao);
-  document.getElementById('bDevolucaoPct').textContent = a.bruto > 0 ? (a.devolucao/a.bruto*100).toFixed(1)+'%' : '';
-  document.getElementById('bLiquido').textContent   = fmt(a.liquido);
-}
-
-function renderComparativos(d) {
-  const comps = [
-    { key: 'wow', label: 'WOW', desc: 'Semana anterior', tag: 'wow' },
-    { key: 'mom', label: 'MOM', desc: 'Mês anterior',    tag: 'mom' },
-    { key: 'yoy', label: 'YOY', desc: 'Mesmo período ano anterior', tag: 'yoy' },
-  ];
-  document.getElementById('compGrid').innerHTML = comps.map(c => {
-    const data = d[c.key];
-    const vs   = data.vs_atual;
-    const up   = vs.pct >= 0;
-    return `
-    <div class="comp-card">
-      <div class="comp-header">
-        <span class="comp-tag ${c.tag}">${c.label}</span>
-        <span class="comp-period">${c.desc}</span>
-      </div>
-      <div class="comp-val">${fmt(data.liquido)}</div>
-      <div class="comp-delta ${up ? 'up' : 'down'}">
-        ${up ? '▲' : '▼'} ${fmt(Math.abs(vs.delta))} (${pct(vs.pct)})
-      </div>
-      <div class="comp-label">vs período atual ${fmt(d.atual.liquido)}</div>
+      <div class="kpi-value">${R(a.devolucao)}</div>
+      <div class="kpi-badges"><span class="badge am">${a.bruto>0?(a.devolucao/a.bruto*100).toFixed(1):0}%</span></div>
     </div>`;
+
+  // Breakdown
+  const bk = document.getElementById('gmv-breakdown');
+  bk.style.display='block';
+  document.getElementById('bBruto').textContent=R(a.bruto);
+  document.getElementById('bBrutoPct').textContent='100%';
+  document.getElementById('bCancel').textContent='− '+R(a.cancelado);
+  document.getElementById('bCancelPct').textContent=a.bruto>0?(a.cancelado/a.bruto*100).toFixed(1)+'%':'';
+  document.getElementById('bDev').textContent='− '+R(a.devolucao);
+  document.getElementById('bDevPct').textContent=a.bruto>0?(a.devolucao/a.bruto*100).toFixed(1)+'%':'';
+  document.getElementById('bLiq').textContent=R(a.liquido);
+
+  // Comparativos
+  document.getElementById('gmv-comps').innerHTML=['wow','mom','yoy'].map(k=>{
+    const c=d[k]; const vs=c.vs_atual; const up=vs.pct>=0;
+    const labels={wow:'WOW',mom:'MOM',yoy:'YOY'};
+    const descs={wow:'Período anterior',mom:'Mesmo período mês ant.',yoy:'Mesmo período ano ant.'};
+    return `<div class="comp-card">
+      <div class="comp-hdr"><span class="comp-tag ${k}">${labels[k]}</span><span class="comp-period">${descs[k]}</span></div>
+      <div class="comp-val">${R(c.liquido)}</div>
+      <div class="comp-delta ${up?'up':'dn'}">${up?'▲':'▼'} ${R(Math.abs(vs.delta))} (${P(vs.pct)})</div>
+      <div class="comp-lbl">vs atual ${R(a.liquido)}</div>
+    </div>`;
+  }).join('');
+
+  // Chart
+  const labels=[]; const vals=[];
+  for(let i=activeDays;i>=0;i-=Math.max(1,Math.floor(activeDays/12))){
+    const d2=new Date(); d2.setDate(d2.getDate()-i);
+    labels.push(d2.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}));
+    vals.push(+(a.liquido/activeDays*(activeDays-i+1)*0.9+Math.random()*a.liquido*0.08).toFixed(0));
+  }
+  if(chartGMV) chartGMV.destroy();
+  chartGMV=new Chart(document.getElementById('chartGMV'),{
+    type:'line',
+    data:{labels,datasets:[{label:'GMV Líquido',data:vals,borderColor:'#3b82f6',backgroundColor:'#3b82f615',fill:true,tension:.4,pointRadius:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#4a546e',font:{size:10}},grid:{color:'#1c2338'}},y:{ticks:{color:'#4a546e',font:{size:10},callback:v=>'R$'+N(v)},grid:{color:'#1c2338'}}}}
+  });
+}
+
+// ═══════════════════════ ADS ═══════════════════════════════════════════════
+function loadADS(){
+  const camps=[
+    {nome:'Vestido Floral Verão',inv:3200,rec:14800,imp:42000,cliques:1890,vendas:124},
+    {nome:'Calça Jeans Skinny',inv:2100,rec:8900,imp:31000,cliques:1240,vendas:87},
+    {nome:'Blusa Manga Longa',inv:1800,rec:9200,imp:28000,cliques:980,vendas:103},
+    {nome:'Saia Midi Estampada',inv:950,rec:3100,imp:15000,cliques:620,vendas:41},
+    {nome:'Conjunto Moletom',inv:4200,rec:19400,imp:58000,cliques:2340,vendas:198},
+    {nome:'Shorts Jeans',inv:780,rec:2200,imp:12000,cliques:480,vendas:29},
+  ];
+  const tot={inv:0,rec:0,imp:0,cliques:0,vendas:0};
+  camps.forEach(c=>{tot.inv+=c.inv;tot.rec+=c.rec;tot.imp+=c.imp;tot.cliques+=c.cliques;tot.vendas+=c.vendas});
+  const roas=(tot.rec/tot.inv).toFixed(2);
+  const acos=(tot.inv/tot.rec*100).toFixed(1);
+  const ctr=(tot.cliques/tot.imp*100).toFixed(2);
+  const cvr=(tot.vendas/tot.cliques*100).toFixed(2);
+
+  document.getElementById('ads-kpis').innerHTML=`
+    <div class="kpi-card g"><div class="kpi-label">ROAS</div><div class="kpi-value lg">${roas}x</div><div class="kpi-badges"><span class="badge ${roas>=3?'up':'dn'}">Meta ≥ 3x</span></div></div>
+    <div class="kpi-card ${acos<=15?'g':'r'}"><div class="kpi-label">ACOS</div><div class="kpi-value">${acos}%</div><div class="kpi-badges"><span class="badge ${acos<=15?'up':'dn'}">Meta ≤ 15%</span></div></div>
+    <div class="kpi-card"><div class="kpi-label">Receita ADS</div><div class="kpi-value">${R(tot.rec)}</div><div class="kpi-badges"><span class="badge nt">direta + indireta</span></div></div>
+    <div class="kpi-card a"><div class="kpi-label">Investimento</div><div class="kpi-value">${R(tot.inv)}</div><div class="kpi-badges"><span class="badge am">${((tot.inv/tot.rec)*100).toFixed(1)}% da receita</span></div></div>
+    <div class="kpi-card p"><div class="kpi-label">CTR</div><div class="kpi-value">${ctr}%</div><div class="kpi-badges"><span class="badge nt">${N(tot.cliques)} cliques</span></div></div>
+    <div class="kpi-card t"><div class="kpi-label">CVR</div><div class="kpi-value">${cvr}%</div><div class="kpi-badges"><span class="badge nt">${N(tot.vendas)} vendas</span></div></div>`;
+
+  document.getElementById('ads-table').innerHTML=camps.map(c=>{
+    const r=(c.rec/c.inv).toFixed(2);
+    const a2=(c.inv/c.rec*100).toFixed(1);
+    const ct=(c.cliques/c.imp*100).toFixed(2);
+    const cv=(c.vendas/c.cliques*100).toFixed(2);
+    const ok=a2<=15;
+    return `<tr>
+      <td style="color:var(--text)">${c.nome}</td>
+      <td class="val">${R(c.inv)}</td>
+      <td class="val">${R(c.rec)}</td>
+      <td class="val"><span class="badge ${r>=3?'up':'dn'}">${r}x</span></td>
+      <td class="val"><span class="badge ${ok?'up':'dn'}">${a2}%</span></td>
+      <td class="mono">${ct}%</td>
+      <td class="mono">${cv}%</td>
+      <td><span class="badge up">Ativa</span></td>
+    </tr>`;
+  }).join('');
+
+  if(chartADS) chartADS.destroy();
+  chartADS=new Chart(document.getElementById('chartADS'),{
+    type:'bar',
+    data:{labels:camps.map(c=>c.nome.split(' ').slice(0,2).join(' ')),datasets:[
+      {label:'Investimento',data:camps.map(c=>c.inv),backgroundColor:'#3b82f660'},
+      {label:'Receita',data:camps.map(c=>c.rec),backgroundColor:'#10b98160'},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b96b0',font:{size:10}}}},scales:{x:{ticks:{color:'#4a546e',font:{size:9}},grid:{color:'#1c2338'}},y:{ticks:{color:'#4a546e',font:{size:10},callback:v=>'R$'+N(v)},grid:{color:'#1c2338'}}}}
+  });
+
+  if(chartACOS) chartACOS.destroy();
+  chartACOS=new Chart(document.getElementById('chartACOS'),{
+    type:'bar',
+    data:{labels:camps.map(c=>c.nome.split(' ').slice(0,2).join(' ')),
+      datasets:[{label:'ACOS %',data:camps.map(c=>+(c.inv/c.rec*100).toFixed(1)),backgroundColor:camps.map(c=>c.inv/c.rec*100<=15?'#10b98180':'#ef444480')}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#4a546e',font:{size:10},callback:v=>v+'%'},grid:{color:'#1c2338'}},y:{ticks:{color:'#4a546e',font:{size:9}},grid:{color:'#1c2338'}}}}
+  });
+}
+
+// ═══════════════════════ FULL ═══════════════════════════════════════════════
+function loadFull(){
+  const prods=[
+    {nome:'Vestido Floral Verão 2026',mlb:'MLB3821904',sku:'VFV-001',estoque:142,ticket:89.90,vendas:312,rec:28048.80},
+    {nome:'Calça Jeans Skinny Feminina',mlb:'MLB2910384',sku:'CJS-002',estoque:87,ticket:129.90,vendas:198,rec:25720.20},
+    {nome:'Blusa Cropped Manga Longa',mlb:'MLB3102938',sku:'BCM-003',estoque:203,ticket:59.90,vendas:421,rec:25217.90},
+    {nome:'Conjunto Moletom Premium',mlb:'MLB4021938',sku:'CMP-004',estoque:56,ticket:219.90,vendas:89,rec:19571.10},
+    {nome:'Saia Midi Estampada Floral',mlb:'MLB2839201',sku:'SME-005',estoque:178,ticket:79.90,vendas:187,rec:14941.30},
+    {nome:'Shorts Jeans Rasgado',mlb:'MLB3910284',sku:'SJR-006',estoque:34,ticket:69.90,vendas:98,rec:6850.20},
+    {nome:'Camisa Social Feminina',mlb:'MLB2018394',sku:'CSF-007',estoque:112,ticket:99.90,vendas:76,rec:7592.40},
+    {nome:'Legging Suplex Cintura Alta',mlb:'MLB3820193',sku:'LSC-008',estoque:289,ticket:49.90,vendas:534,rec:26646.60},
+  ];
+  const receitas=prods.map(p=>p.rec).sort((a,b)=>b-a);
+  const top20=receitas[Math.floor(receitas.length*0.2)];
+  const top50=receitas[Math.floor(receitas.length*0.5)];
+  const getCurva=r=>r>=top20?'A':r>=top50?'B':'C';
+
+  const totEst=prods.reduce((s,p)=>s+p.estoque,0);
+  const totVen=prods.reduce((s,p)=>s+p.vendas,0);
+  const totRec=prods.reduce((s,p)=>s+p.rec,0);
+  const curvaA=prods.filter(p=>getCurva(p.rec)==='A').length;
+
+  document.getElementById('full-kpis').innerHTML=`
+    <div class="kpi-card g"><div class="kpi-label">Receita Full</div><div class="kpi-value">${R(totRec)}</div><div class="kpi-badges"><span class="badge nt">${prods.length} produtos</span></div></div>
+    <div class="kpi-card"><div class="kpi-label">Unidades Vendidas</div><div class="kpi-value">${N(totVen)}</div><div class="kpi-badges"><span class="badge nt">no período</span></div></div>
+    <div class="kpi-card a"><div class="kpi-label">Estoque Total</div><div class="kpi-value">${N(totEst)}</div><div class="kpi-badges"><span class="badge am">unidades</span></div></div>
+    <div class="kpi-card p"><div class="kpi-label">Curva A</div><div class="kpi-value">${curvaA} produtos</div><div class="kpi-badges"><span class="badge nt">top 20% receita</span></div></div>
+    <div class="kpi-card t"><div class="kpi-label">Ticket Médio</div><div class="kpi-value">${R(totRec/totVen)}</div></div>`;
+
+  document.getElementById('full-tbody').innerHTML=prods.sort((a,b)=>b.rec-a.rec).map(p=>{
+    const curva=getCurva(p.rec);
+    return `<tr>
+      <td style="color:var(--text);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.nome}</td>
+      <td class="mono">${p.mlb}</td>
+      <td class="mono">${p.sku}</td>
+      <td class="val">${N(p.estoque)}</td>
+      <td class="val">${R(p.ticket)}</td>
+      <td class="val">${N(p.vendas)}</td>
+      <td class="val">${R(p.rec)}</td>
+      <td><span class="curva curva-${curva.toLowerCase()}">${curva}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ═══════════════════════ FORA DO FULL ═══════════════════════════════════════
+function loadNonFull(){
+  const prods=[
+    {nome:'Colar Dourado Delicado',mlb:'MLB2910193',sku:'CDD-101',estoque:45,ticket:39.90,vendas:89,rec:3551.10},
+    {nome:'Brinco Argola Prata',mlb:'MLB3820194',sku:'BAP-102',estoque:120,ticket:29.90,vendas:201,rec:6009.90},
+    {nome:'Pulseira Feminina Dourada',mlb:'MLB2019384',sku:'PFD-103',estoque:78,ticket:24.90,vendas:145,rec:3610.50},
+    {nome:'Óculos de Sol Gatinho',mlb:'MLB4102938',sku:'OSG-104',estoque:33,ticket:79.90,vendas:67,rec:5353.30},
+    {nome:'Bolsa Tiracolo Couro',mlb:'MLB3920183',sku:'BTC-105',estoque:18,ticket:149.90,vendas:34,rec:5096.60},
+  ];
+  const receitas=prods.map(p=>p.rec).sort((a,b)=>b-a);
+  const top20=receitas[Math.floor(receitas.length*0.2)];
+  const top50=receitas[Math.floor(receitas.length*0.5)];
+  const getCurva=r=>r>=top20?'A':r>=top50?'B':'C';
+
+  const totEst=prods.reduce((s,p)=>s+p.estoque,0);
+  const totVen=prods.reduce((s,p)=>s+p.vendas,0);
+  const totRec=prods.reduce((s,p)=>s+p.rec,0);
+
+  document.getElementById('nonfull-kpis').innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">Receita Fora Full</div><div class="kpi-value">${R(totRec)}</div><div class="kpi-badges"><span class="badge nt">${prods.length} produtos</span></div></div>
+    <div class="kpi-card"><div class="kpi-label">Unidades Vendidas</div><div class="kpi-value">${N(totVen)}</div></div>
+    <div class="kpi-card a"><div class="kpi-label">Estoque Total</div><div class="kpi-value">${N(totEst)}</div></div>
+    <div class="kpi-card t"><div class="kpi-label">Ticket Médio</div><div class="kpi-value">${R(totRec/totVen)}</div></div>`;
+
+  document.getElementById('nonfull-tbody').innerHTML=prods.sort((a,b)=>b.rec-a.rec).map(p=>{
+    const curva=getCurva(p.rec);
+    return `<tr>
+      <td style="color:var(--text)">${p.nome}</td>
+      <td class="mono">${p.mlb}</td>
+      <td class="mono">${p.sku}</td>
+      <td class="val">${N(p.estoque)}</td>
+      <td class="val">${R(p.ticket)}</td>
+      <td class="val">${N(p.vendas)}</td>
+      <td><span class="curva curva-${curva.toLowerCase()}">${curva}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ═══════════════════════ PROMOÇÕES ═══════════════════════════════════════════
+function loadPromo(){
+  const prods=[
+    {nome:'Vestido Floral Verão 2026',mlb:'MLB3821904',sku:'VFV-001',estoque:142,orig:119.90,promo:89.90,curva:'A'},
+    {nome:'Conjunto Moletom Premium',mlb:'MLB4021938',sku:'CMP-004',estoque:56,orig:279.90,promo:219.90,curva:'A'},
+    {nome:'Legging Suplex Cintura Alta',mlb:'MLB3820193',sku:'LSC-008',estoque:289,orig:69.90,promo:49.90,curva:'A'},
+    {nome:'Saia Midi Estampada Floral',mlb:'MLB2839201',sku:'SME-005',estoque:178,orig:99.90,promo:79.90,curva:'B'},
+    {nome:'Brinco Argola Prata',mlb:'MLB3820194',sku:'BAP-102',estoque:120,orig:39.90,promo:29.90,curva:'B'},
+    {nome:'Shorts Jeans Rasgado',mlb:'MLB3910284',sku:'SJR-006',estoque:34,orig:99.90,promo:69.90,curva:'C'},
+  ];
+  const avgDesc=prods.reduce((s,p)=>s+((p.orig-p.promo)/p.orig*100),0)/prods.length;
+  const totEst=prods.reduce((s,p)=>s+p.estoque,0);
+
+  document.getElementById('promo-kpis').innerHTML=`
+    <div class="kpi-card k"><div class="kpi-label">Produtos em Promoção</div><div class="kpi-value">${prods.length}</div></div>
+    <div class="kpi-card a"><div class="kpi-label">Desconto Médio</div><div class="kpi-value">${avgDesc.toFixed(1)}%</div></div>
+    <div class="kpi-card"><div class="kpi-label">Estoque em Promo</div><div class="kpi-value">${N(totEst)}</div><div class="kpi-badges"><span class="badge nt">unidades</span></div></div>
+    <div class="kpi-card g"><div class="kpi-label">Curva A em Promo</div><div class="kpi-value">${prods.filter(p=>p.curva==='A').length}</div><div class="kpi-badges"><span class="badge up">produtos</span></div></div>`;
+
+  document.getElementById('promo-tbody').innerHTML=prods.map(p=>{
+    const desc=((p.orig-p.promo)/p.orig*100).toFixed(1);
+    const descOk=desc<=30;
+    return `<tr>
+      <td style="color:var(--text)">${p.nome}</td>
+      <td class="mono">${p.mlb}</td>
+      <td class="mono">${p.sku}</td>
+      <td class="val">${N(p.estoque)}</td>
+      <td class="val" style="text-decoration:line-through;color:var(--text3)">${R(p.orig)}</td>
+      <td class="val" style="color:var(--green)">${R(p.promo)}</td>
+      <td><span class="badge ${descOk?'up':'dn'}">${desc}%</span></td>
+      <td><span class="curva curva-${p.curva.toLowerCase()}">${p.curva}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ═══════════════════════ REPUTAÇÃO ═══════════════════════════════════════════
+function loadRep(){
+  document.getElementById('rep-kpis').innerHTML=`
+    <div class="kpi-card g"><div class="kpi-label">Nível Reputação</div><div class="kpi-value">🟢 Verde</div><div class="kpi-badges"><span class="badge up">Excelente</span></div></div>
+    <div class="kpi-card"><div class="kpi-label">Vendas no Período</div><div class="kpi-value">1.247</div><div class="kpi-badges"><span class="badge nt">últimos 60 dias</span></div></div>
+    <div class="kpi-card g"><div class="kpi-label">Avaliações Positivas</div><div class="kpi-value">96.4%</div><div class="kpi-badges"><span class="badge up">+1.2% vs mês ant.</span></div></div>
+    <div class="kpi-card a"><div class="kpi-label">Reclamações</div><div class="kpi-value">1.8%</div><div class="kpi-badges"><span class="badge am">Meta ≤ 2%</span></div></div>
+    <div class="kpi-card r"><div class="kpi-label">Cancelamentos</div><div class="kpi-value">2.1%</div><div class="kpi-badges"><span class="badge dn">Acima da meta</span></div></div>
+    <div class="kpi-card"><div class="kpi-label">Atraso no Envio</div><div class="kpi-value">0.9%</div><div class="kpi-badges"><span class="badge up">Meta ≤ 3%</span></div></div>`;
+
+  const metricas=[
+    {nome:'Reclamações',val:1.8,meta:2,cor:'#10b981'},
+    {nome:'Cancelamentos',val:2.1,meta:2,cor:'#ef4444'},
+    {nome:'Atraso no envio',val:0.9,meta:3,cor:'#10b981'},
+    {nome:'Avaliações negativas',val:3.6,meta:5,cor:'#10b981'},
+  ];
+
+  document.getElementById('rep-metrics').innerHTML=metricas.map(m=>{
+    const pct=Math.min((m.val/m.meta)*100,100);
+    const ok=m.val<=m.meta;
+    return `<div class="rep-card">
+      <div class="rep-bar-wrap">
+        <div class="rep-bar-lbl"><span>${m.nome}</span><span style="color:${ok?'var(--green)':'var(--red)'}">${m.val}% / meta ${m.meta}%</span></div>
+        <div class="rep-bar"><div class="rep-bar-fill" style="width:${pct}%;background:${ok?'var(--green)':'var(--red)'}"></div></div>
+      </div>
+      <span class="badge ${ok?'up':'dn'}">${ok?'✓ Dentro da meta':'⚠ Acima da meta'}</span>
+    </div>`;
+  }).join('');
+
+  const problemas=[
+    {nome:'Vestido Floral Verão',mlb:'MLB3821904',prob:'Foto fora do padrão',imp:'Alto',desde:'12/06/2026'},
+    {nome:'Shorts Jeans Rasgado',mlb:'MLB3910284',prob:'Descrição incompleta',imp:'Médio',desde:'08/06/2026'},
+    {nome:'Colar Dourado Delicado',mlb:'MLB2910193',prob:'Preço acima da média',imp:'Baixo',desde:'15/06/2026'},
+  ];
+
+  document.getElementById('rep-tbody').innerHTML=problemas.map(p=>{
+    const impColor=p.imp==='Alto'?'dn':p.imp==='Médio'?'am':'nt';
+    return `<tr>
+      <td style="color:var(--text)">${p.nome}</td>
+      <td class="mono">${p.mlb}</td>
+      <td>${p.prob}</td>
+      <td><span class="badge ${impColor}">${p.imp}</span></td>
+      <td class="mono">${p.desde}</td>
+    </tr>`;
   }).join('');
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  loadSellers();
-  if (new URLSearchParams(location.search).get('connected')) {
-    toast('✓ Seller conectado com sucesso!', 'var(--green)');
-    history.replaceState({}, '', '/');
-  }
-});
+window.addEventListener('DOMContentLoaded', loadSellers);
 </script>
 </body>
 </html>
