@@ -313,7 +313,7 @@ function killChart(id){if(charts[id]){charts[id].destroy();delete charts[id]}}
 // ─── DEMO DATA PER SELLER ──────────────────────────────────────────────────
 function getDemoData(sellerId, days){
   // seed para dados consistentes por seller
-  const seeds={DEMO_001:1,DEMO_002:2,DEMO_003:3};
+  const seeds={DEMO_001:1,DEMO_002:2,DEMO_003:3,DEMO_004:4,DEMO_005:5};
   const s=seeds[sellerId]||1;
   const base=60000*(days/30)*s*0.7;
 
@@ -535,6 +535,16 @@ function loadADS(){
 
   // Demo camps por seller
   const campsByS={
+    DEMO_004:[
+      {nome:'Tênis Running Pro',inv:4800,rec:22000,imp:64000,cliques:2800,vendas:215},
+      {nome:'Shorts Academia',inv:2200,rec:9800,imp:38000,cliques:1620,vendas:134},
+      {nome:'Camiseta Dry Fit',inv:1900,rec:8100,imp:29000,cliques:1180,vendas:98},
+    ],
+    DEMO_005:[
+      {nome:'Kit Skincare Completo',inv:3600,rec:16400,imp:48000,cliques:2100,vendas:178},
+      {nome:'Perfume Importado 100ml',inv:5200,rec:24800,imp:71000,cliques:3100,vendas:267},
+      {nome:'Sérum Vitamina C',inv:2800,rec:12200,imp:41000,cliques:1740,vendas:152},
+    ],
     DEMO_001:[
       {nome:'Vestido Floral Verão',inv:3200,rec:14800,imp:42000,cliques:1890,vendas:124},
       {nome:'Conjunto Moletom',inv:4200,rec:19400,imp:58000,cliques:2340,vendas:198},
@@ -592,6 +602,18 @@ function loadADS(){
 // ═══════════════ FULL ══════════════════════════════════════════════════════
 function getFullProds(sellerId){
   const bases={
+    DEMO_004:[
+      {nome:'Tênis Running Pro X9',mlb:'MLB5021938',sku:'TRP-401',estoque:98,ticket:299.90,vendas:215,rec:64478.50},
+      {nome:'Shorts Academia Flex',mlb:'MLB4920183',sku:'SAF-402',estoque:167,ticket:79.90,vendas:312,rec:24928.80},
+      {nome:'Camiseta Dry Fit UV',mlb:'MLB5102938',sku:'CDU-403',estoque:234,ticket:59.90,vendas:421,rec:25217.90},
+      {nome:'Mochila Esportiva 30L',mlb:'MLB4820193',sku:'ME3-404',estoque:56,ticket:189.90,vendas:89,rec:16901.10},
+    ],
+    DEMO_005:[
+      {nome:'Kit Skincare Completo',mlb:'MLB6021938',sku:'KSC-501',estoque:43,ticket:189.90,vendas:178,rec:33802.20},
+      {nome:'Perfume Importado 100ml',mlb:'MLB5920183',sku:'PI1-502',estoque:29,ticket:349.90,vendas:267,rec:93423.30},
+      {nome:'Sérum Vitamina C 30ml',mlb:'MLB6102938',sku:'SVC-503',estoque:112,ticket:89.90,vendas:312,rec:28048.80},
+      {nome:'Protetor Solar FPS50',mlb:'MLB5820193',sku:'PSF-504',estoque:189,ticket:49.90,vendas:534,rec:26646.60},
+    ],
     DEMO_001:[
       {nome:'Vestido Floral Verão 2026',mlb:'MLB3821904',sku:'VFV-001',estoque:142,ticket:89.90,vendas:312,rec:28048.80},
       {nome:'Calça Jeans Skinny',mlb:'MLB2910384',sku:'CJS-002',estoque:87,ticket:129.90,vendas:198,rec:25720.20},
@@ -650,6 +672,14 @@ function loadNonFull(){
   const active=getActiveSellers();
   document.getElementById('nonfull-title').textContent='Fora do Full — '+getActiveLabel();
   const nfProds={
+    DEMO_004:[
+      {nome:'Toalha Microfibra Sport',mlb:'MLB5019384',sku:'TMS-405',estoque:145,ticket:39.90,vendas:189,rec:7541.10},
+      {nome:'Garrafa Térmica 1L',mlb:'MLB4910293',sku:'GT1-406',estoque:88,ticket:59.90,vendas:134,rec:8026.60},
+    ],
+    DEMO_005:[
+      {nome:'Nécessaire Viagem',mlb:'MLB6019384',sku:'NV-505',estoque:67,ticket:49.90,vendas:98,rec:4890.20},
+      {nome:'Espelho Compacto LED',mlb:'MLB5910293',sku:'ECL-506',estoque:112,ticket:79.90,vendas:145,rec:11585.50},
+    ],
     DEMO_001:[{nome:'Cinto Couro Masculino',mlb:'MLB1920384',sku:'CCM-201',estoque:55,ticket:49.90,vendas:78,rec:3892.20},{nome:'Meia Cano Longo',mlb:'MLB2039184',sku:'MCL-202',estoque:230,ticket:19.90,vendas:312,rec:6208.80}],
     DEMO_002:[{nome:'Lenço Estampado',mlb:'MLB3029184',sku:'LE-203',estoque:88,ticket:29.90,vendas:124,rec:3707.60}],
     DEMO_003:[{nome:'Chapéu Panamá',mlb:'MLB2910293',sku:'CP-204',estoque:42,ticket:89.90,vendas:56,rec:5034.40}],
@@ -679,6 +709,14 @@ function loadPromo(){
   const active=getActiveSellers();
   document.getElementById('promo-title').textContent='Promoções — '+getActiveLabel();
   const promoData={
+    DEMO_004:[
+      {nome:'Tênis Running Pro X9',mlb:'MLB5021938',sku:'TRP-401',estoque:98,orig:369.90,promo:299.90,curva:'A'},
+      {nome:'Mochila Esportiva 30L',mlb:'MLB4820193',sku:'ME3-404',estoque:56,orig:239.90,promo:189.90,curva:'B'},
+    ],
+    DEMO_005:[
+      {nome:'Kit Skincare Completo',mlb:'MLB6021938',sku:'KSC-501',estoque:43,orig:249.90,promo:189.90,curva:'A'},
+      {nome:'Perfume Importado 100ml',mlb:'MLB5920183',sku:'PI1-502',estoque:29,orig:429.90,promo:349.90,curva:'A'},
+    ],
     DEMO_001:[{nome:'Vestido Floral Verão',mlb:'MLB3821904',sku:'VFV-001',estoque:142,orig:119.90,promo:89.90,curva:'A'},{nome:'Legging Suplex',mlb:'MLB3820193',sku:'LSC-008',estoque:289,orig:69.90,promo:49.90,curva:'A'}],
     DEMO_002:[{nome:'Colar Dourado',mlb:'MLB2910193',sku:'CDD-101',estoque:45,orig:49.90,promo:39.90,curva:'B'}],
     DEMO_003:[{nome:'Bolsa Tiracolo',mlb:'MLB3920183',sku:'BTC-105',estoque:18,orig:199.90,promo:149.90,curva:'A'}],
@@ -706,6 +744,8 @@ function loadRep(){
   document.getElementById('rep-title').textContent='Reputação — '+getActiveLabel();
 
   const repData={
+    DEMO_004:{nivel:'🟢 Verde',vendas:956,pos:95.1,rec:2.0,cancel:1.9,atraso:1.4},
+    DEMO_005:{nivel:'🟢 Verde',vendas:1312,pos:97.2,rec:1.4,cancel:1.6,atraso:0.8},
     DEMO_001:{nivel:'🟢 Verde',vendas:1247,pos:96.4,rec:1.8,cancel:2.1,atraso:0.9},
     DEMO_002:{nivel:'🟡 Amarelo',vendas:432,pos:91.2,rec:3.1,cancel:4.2,atraso:2.1},
     DEMO_003:{nivel:'🟢 Verde',vendas:876,pos:94.8,rec:2.2,cancel:1.8,atraso:1.2},
