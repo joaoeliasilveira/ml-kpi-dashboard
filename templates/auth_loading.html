@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<title>Conectando… — IntelKPI</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0a0d14; color: #e8ecf4;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .box {
+    text-align: center; max-width: 420px; padding: 40px 32px;
+    background: #161b2a; border: 1px solid #1e2640; border-radius: 16px;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800;
+    margin-bottom: 28px;
+  }
+  .logo span { color: #3b82f6; }
+  .spinner {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 3px solid #1e2640; border-top-color: #3b82f6;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 24px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  h2 { font-family: 'Syne', sans-serif; font-size: 20px; margin-bottom: 10px; }
+  p  { font-size: 13px; color: #8b96b0; line-height: 1.6; }
+  .bar {
+    margin-top: 28px; background: #1e2640; border-radius: 6px; height: 4px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; background: #3b82f6; border-radius: 6px;
+    animation: fill 3s ease-out forwards;
+  }
+  @keyframes fill { from { width: 0% } to { width: 100% } }
+  .status { margin-top: 14px; font-size: 12px; color: #5a6480; }
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="logo">Intel<span>KPI</span></div>
+  <div class="spinner"></div>
+  <h2>Preparando conexão…</h2>
+  <p>Aguarde enquanto o servidor inicializa.<br>Você será redirecionado ao Mercado Livre em instantes.</p>
+  <div class="bar"><div class="bar-fill"></div></div>
+  <div class="status" id="status">Inicializando servidor…</div>
+</div>
+
+<script>
+  const authUrl = "{{ auth_url }}";
+  const messages = [
+    "Inicializando servidor…",
+    "Verificando conexão com banco de dados…",
+    "Servidor pronto! Redirecionando ao Mercado Livre…"
+  ];
+  let i = 0;
+  const status = document.getElementById('status');
+
+  // Pré-aquece o servidor com um ping antes de ir ao ML
+  async function warmup() {
+    try {
+      await fetch('/ping');
+    } catch(e) {}
+
+    const interval = setInterval(() => {
+      i++;
+      if (i < messages.length) status.textContent = messages[i];
+    }, 1000);
+
+    // Aguarda 3s para garantir que o servidor está acordado, depois redireciona
+    setTimeout(() => {
+      clearInterval(interval);
+      window.location.href = authUrl;
+    }, 3000);
+  }
+
+  warmup();
+</script>
+</body>
+</html>
