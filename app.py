@@ -10,8 +10,8 @@ from urllib.parse import urlencode
 app = Flask(__name__)
 
 # ─── CONFIG ────────────────────────────────────────────────────────────────────
-ML_CLIENT_ID     = os.environ.get("ML_CLIENT_ID", "4068914615136180").strip()
-ML_CLIENT_SECRET = os.environ.get("ML_CLIENT_SECRET", "k0PbDTSlX6egF3BTUcAsqLSt6PHpwhNc").strip()
+ML_CLIENT_ID     = os.environ.get("ML_CLIENT_ID", "8220714576874952").strip()
+ML_CLIENT_SECRET = os.environ.get("ML_CLIENT_SECRET", "3tJSeu3knCS8mGU3lpAGuYkKduLEbOEn").strip()
 ML_REDIRECT_URI  = "https://ml-kpi-dashboard.onrender.com/callback"
 DATABASE_URL     = os.environ.get("DATABASE_URL", "").strip()
 
@@ -260,3 +260,60 @@ with app.app_context():
         init_db()
     except Exception as e:
         print(f"DB init error: {e}")
+
+# ─── DEMO SELLER ───────────────────────────────────────────────────────────────
+@app.route("/api/demo/activate")
+def demo_activate():
+    """Injeta um seller fictício no banco para testes."""
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO sellers (user_id, nickname, access_token, refresh_token)
+                VALUES ('DEMO_001', 'DEMO — Oficial Modas', 'demo_token', 'demo_refresh')
+                ON CONFLICT (user_id) DO UPDATE
+                SET nickname='DEMO — Oficial Modas', updated_at=NOW()
+            """)
+        conn.commit()
+    return redirect("/?connected=1")
+
+@app.route("/api/gmv/DEMO_001")
+def api_gmv_demo():
+    import random, math
+    period = int(request.args.get("period", "30"))
+
+    def fake_gmv(base_bruto, seed):
+        random.seed(seed)
+        bruto     = round(base_bruto * random.uniform(0.9, 1.1), 2)
+        cancelado = round(bruto * random.uniform(0.03, 0.07), 2)
+        devolucao = round(bruto * random.uniform(0.01, 0.03), 2)
+        liquido   = round(bruto - cancelado - devolucao, 2)
+        orders    = random.randint(80, 300)
+        return {
+            "bruto": bruto, "cancelado": cancelado,
+            "devolucao": devolucao, "liquido": liquido,
+            "orders": orders, "ticket_medio": round(bruto / orders, 2)
+        }
+
+    base = 85000 * (period / 30)
+    atual    = fake_gmv(base, 42)
+    anterior = fake_gmv(base * 0.88, 7)
+    mom_data = fake_gmv(base * 0.92, 13)
+    yoy_data = fake_gmv(base * 0.75, 99)
+
+    def comp(a, b):
+        delta = round(a - b, 2)
+        pct   = round((delta / b * 100) if b else 0, 1)
+        return {"delta": delta, "pct": pct}
+
+    today = datetime.today()
+    return jsonify({
+        "periodo": {
+            "from": (today - timedelta(days=period)).strftime("%Y-%m-%d"),
+            "to":   today.strftime("%Y-%m-%d"),
+            "days": period
+        },
+        "atual": atual,
+        "wow":   {**anterior, "vs_atual": comp(atual["liquido"], anterior["liquido"])},
+        "mom":   {**mom_data,  "vs_atual": comp(atual["liquido"], mom_data["liquido"])},
+        "yoy":   {**yoy_data,  "vs_atual": comp(atual["liquido"], yoy_data["liquido"])},
+    })
