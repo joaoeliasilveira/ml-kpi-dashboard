@@ -264,15 +264,23 @@ with app.app_context():
 # ─── DEMO SELLER ───────────────────────────────────────────────────────────────
 @app.route("/api/demo/activate")
 def demo_activate():
-    """Injeta um seller fictício no banco para testes."""
+    """Injeta sellers fictícios no banco para testes."""
+    demo_sellers = [
+        ('DEMO_001', 'Oficial Modas'),
+        ('DEMO_002', 'Casa & Estilo'),
+        ('DEMO_003', 'TechStore BR'),
+        ('DEMO_004', 'Esporte Total'),
+        ('DEMO_005', 'Beleza Premium'),
+    ]
     with get_conn() as conn:
         with conn.cursor() as cur:
-            cur.execute("""
-                INSERT INTO sellers (user_id, nickname, access_token, refresh_token)
-                VALUES ('DEMO_001', 'DEMO — Oficial Modas', 'demo_token', 'demo_refresh')
-                ON CONFLICT (user_id) DO UPDATE
-                SET nickname='DEMO — Oficial Modas', updated_at=NOW()
-            """)
+            for uid, nick in demo_sellers:
+                cur.execute("""
+                    INSERT INTO sellers (user_id, nickname, access_token, refresh_token)
+                    VALUES (%s, %s, 'demo_token', 'demo_refresh')
+                    ON CONFLICT (user_id) DO UPDATE
+                    SET nickname=%s, updated_at=NOW()
+                """, (uid, nick, nick))
         conn.commit()
     return redirect("/?connected=1")
 
